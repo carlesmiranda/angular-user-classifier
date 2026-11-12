@@ -1,1 +1,18 @@
-/* You can add global styles to this file, and also import other style files */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --principal-color: #586F7C;
+    --secundary-color: #B8DBD9;
+    --text-color: #000000;
+    --background-color: #F4F4F9;
+    --other-color: #04724D;
+}
+
+@font-face {
+    font-family: Inter;
+    src: url('./assets/fonts/Inter/static/Inter_18pt-Regular.ttf');
+}
