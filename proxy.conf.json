@@ -1,0 +1,7 @@
+{
+  "/corp": {
+    "target": "https://hnst-static.s3.eu-west-1.amazonaws.com",
+    "secure": true,
+    "changeOrigin": true
+  }
+}
