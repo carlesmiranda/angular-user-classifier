@@ -1,0 +1,21 @@
+.table{
+     display: flex;
+    justify-content: center;
+}
+
+table{
+    width: 80%;
+    border-radius: 10px;
+    font-family: "Inter";
+}
+
+th,
+td{
+    padding: 15px 20px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+th{
+    background-color: var(--secundary-color);
+}

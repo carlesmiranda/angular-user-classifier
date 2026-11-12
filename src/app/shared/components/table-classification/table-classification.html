@@ -1,0 +1,21 @@
+<div class="table">
+  <table>
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Age</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (customer of allCustomers$ | async; track customer.id) {
+        <tr>
+          <td>{{customer.id}}</td>
+          <td>{{customer.name}}</td>
+          <td>{{customer.age}}</td>
+        </tr>
+        
+      }
+    </tbody>
+  </table>
+</div>
