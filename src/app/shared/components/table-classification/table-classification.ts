@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Customer } from '../../../models/customer.model.';
 import { Store } from '@ngrx/store';
-import { selectAllCustomers } from '../../../store/customers/customers.selectors';
+import { selectAllCustomers, selectPiriPiriLoversCustomers, selectPolloHierbasLoversCustomers } from '../../../store/customers/customers.selectors';
 import { loadCustomersInfoAction } from '../../../store/customers/customers.actions';
 import { AsyncPipe } from '@angular/common';
 
@@ -14,9 +14,19 @@ import { AsyncPipe } from '@angular/common';
 export class TableClassification {
   allCustomers$;
   allCustomers: Customer[] = [];
+  piriPiriLovers$;
+  piriPiriLovers: Customer[] = [];
+  polloHierbasLovers$;
+  polloHierbasLovers: Customer[] = [];
+  customers$;
+  customers: Customer[] = [];
+  
 
   constructor(private store: Store) {
     this.allCustomers$ = this.store.select(selectAllCustomers);
+    this.piriPiriLovers$ = this.store.select(selectPiriPiriLoversCustomers);
+    this.polloHierbasLovers$ = this.store.select(selectPolloHierbasLoversCustomers);
+    this.customers$ = this.allCustomers$;
   }
 
   ngOnInit() {
@@ -29,6 +39,15 @@ export class TableClassification {
 
     console.log(this.allCustomers)
   }
+
+  clickBtnType(type: string) {
+    if (type === 'piri') return this.customers$ = this.piriPiriLovers$;
+    if (type === 'hierbas') return this.customers$ = this.polloHierbasLovers$;
+    
+    return this.customers$ = this.allCustomers$;
+  }
+
+
 
   
 }

@@ -27,6 +27,7 @@ export class CustomersEffects {
               id: customer.id,
               age: customer.age,
               name: customer.name,
+              profile: this.obtenerPerfil(customer.name)
             }));
             return loadCustomersInfoSuccessAction({ customers: customers });
           }),
@@ -38,4 +39,13 @@ export class CustomersEffects {
       }),
     ),
   );
+
+  obtenerPerfil(name: string) {
+    const PERFIL_PIRI_PIRI = 'Piri Piri Lovers';
+    const PERFIL_POLLO_HIERBAS = 'Pollo con Hierbas Lovers';
+
+    if (!name) return PERFIL_PIRI_PIRI;
+
+    return (name.toLowerCase().includes('b') || name.toLowerCase().includes('h')) ? PERFIL_POLLO_HIERBAS : PERFIL_PIRI_PIRI;
+  }
 }

@@ -1,20 +1,26 @@
 <div class="table">
+    <div class="buttons">
+        <button (click)="clickBtnType('all')">All</button>
+        <button (click)="clickBtnType('piri')">Piri Piri Lovers</button>
+        <button (click)="clickBtnType('hierbas')">Pollo Con Hierbas Lovers</button>
+    </div>
   <table>
     <thead>
       <tr>
         <th>Id</th>
         <th>Name</th>
         <th>Age</th>
+        <th>Profile</th>
       </tr>
     </thead>
     <tbody>
-      @for (customer of allCustomers$ | async; track customer.id) {
+      @for (customer of customers$ | async; track customer.id) {
         <tr>
           <td>{{customer.id}}</td>
           <td>{{customer.name}}</td>
           <td>{{customer.age}}</td>
-        </tr>
-        
+          <td>{{customer.profile}}</td>
+        </tr>        
       }
     </tbody>
   </table>
