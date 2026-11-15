@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Customer } from '../../../models/customer.model.';
 import { Store } from '@ngrx/store';
-import { selectAllCustomers, selectPiriPiriLoversCustomers, selectPolloHierbasLoversCustomers } from '../../../store/customers/customers.selectors';
-import { loadCustomersInfoAction } from '../../../store/customers/customers.actions';
+import { selectAllCustomers, selectSortBy, selectSortedCustomers } from '../../../store/customers/customers.selectors';
+import { changeSortCustomersAction, loadCustomersInfoAction } from '../../../store/customers/customers.actions';
 import { AsyncPipe } from '@angular/common';
 
 @Component({
@@ -12,42 +12,18 @@ import { AsyncPipe } from '@angular/common';
   templateUrl: './table-classification.html',
 })
 export class TableClassification {
-  allCustomers$;
-  allCustomers: Customer[] = [];
-  piriPiriLovers$;
-  piriPiriLovers: Customer[] = [];
-  polloHierbasLovers$;
-  polloHierbasLovers: Customer[] = [];
-  customers$;
-  customers: Customer[] = [];
-  
+  private store = inject(Store);
+  allCustomers$ = this.store.select(selectSortedCustomers);
+  sortBy$ = this.store.select(selectSortBy);
 
-  constructor(private store: Store) {
-    this.allCustomers$ = this.store.select(selectAllCustomers);
-    this.piriPiriLovers$ = this.store.select(selectPiriPiriLoversCustomers);
-    this.polloHierbasLovers$ = this.store.select(selectPolloHierbasLoversCustomers);
-    this.customers$ = this.allCustomers$;
-  }
+  constructor() {}
 
   ngOnInit() {
-    this.store.dispatch(loadCustomersInfoAction());
-
-    this.allCustomers$.subscribe((customers) => {
-      this.allCustomers = customers;
-      console.log(this.allCustomers);
-    });
-
-    console.log(this.allCustomers)
+    this.store.dispatch(loadCustomersInfoAction());       
   }
 
-  clickBtnType(type: string) {
-    if (type === 'piri') return this.customers$ = this.piriPiriLovers$;
-    if (type === 'hierbas') return this.customers$ = this.polloHierbasLovers$;
-    
-    return this.customers$ = this.allCustomers$;
+  changeSort(value: string) {
+    this.store.dispatch(changeSortCustomersAction({sortBy: value as keyof Customer}))
   }
-
-
-
   
 }

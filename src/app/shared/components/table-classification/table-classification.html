@@ -1,10 +1,14 @@
 <div class="table">
-    <div class="buttons">
-        <button (click)="clickBtnType('all')">All</button>
-        <button (click)="clickBtnType('piri')">Piri Piri Lovers</button>
-        <button (click)="clickBtnType('hierbas')">Pollo Con Hierbas Lovers</button>
+    <div class="dropdown">
+        <label for="sort">Sort By: </label>
+        <select id="sort" #sortSelect (change)="changeSort(sortSelect.value)" [value]="sortBy$ | async">
+            <option value="id">Id</option>
+            <option value="name">Name</option>
+            <option value="age">Age</option>
+            <option value="profile">Profile</option>
+        </select>
     </div>
-  <table>
+  <table>    
     <thead>
       <tr>
         <th>Id</th>
@@ -14,13 +18,13 @@
       </tr>
     </thead>
     <tbody>
-      @for (customer of customers$ | async; track customer.id) {
+      @for (customer of allCustomers$ | async; track customer.id) {
         <tr>
-          <td>{{customer.id}}</td>
-          <td>{{customer.name}}</td>
-          <td>{{customer.age}}</td>
-          <td>{{customer.profile}}</td>
-        </tr>        
+          <td>{{ customer.id }}</td>
+          <td>{{ customer.name }}</td>
+          <td>{{ customer.age }}</td>
+          <td>{{ customer.profile }}</td>
+        </tr>
       }
     </tbody>
   </table>

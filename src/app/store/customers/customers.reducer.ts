@@ -1,11 +1,12 @@
 import { createReducer, on } from "@ngrx/store";
 import { CustomerStateInterface } from "./customersState.interface";
-import { loadCustomersInfoAction, loadCustomersInfoFailureAction, loadCustomersInfoSuccessAction } from "./customers.actions";
+import { changeSortCustomersAction, loadCustomersInfoAction, loadCustomersInfoFailureAction, loadCustomersInfoSuccessAction } from "./customers.actions";
 
 const initialState: CustomerStateInterface = {
     customers: [],
     isLoading: false,
-    error: null    
+    error: null,
+    sortBy: 'id'
 }
 
 export const customerReduer = createReducer(
@@ -19,7 +20,7 @@ export const customerReduer = createReducer(
 
     on(loadCustomersInfoSuccessAction, (state, {customers}) => ({
         ...state,
-        customers: customers,
+        customers,
         isLoading: false,
         error: null,
     })),
@@ -27,6 +28,11 @@ export const customerReduer = createReducer(
     on(loadCustomersInfoFailureAction, (state, { error }) => ({
         ...state,
         isLoading: false,
-        error: error
+        error,
+    })),
+
+    on(changeSortCustomersAction, (state, {sortBy}) => ({
+        ...state,
+        sortBy,
     }))
 )
