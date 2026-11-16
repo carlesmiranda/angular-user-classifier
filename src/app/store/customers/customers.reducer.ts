@@ -9,7 +9,7 @@ const initialState: CustomerStateInterface = {
     sortBy: 'id'
 }
 
-export const customerReduer = createReducer(
+export const customerReducer = createReducer(
     initialState,
     
     on(loadCustomersInfoAction, (state) => ({
