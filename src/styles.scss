@@ -4,6 +4,12 @@
     box-sizing: border-box;
 }
 
+body{
+    position: relative;
+    min-height: 100vh;
+    // border: 1rem solid red
+}
+
 :root {
     --principal-color: #586F7C;
     --secundary-color: #B8DBD9;
