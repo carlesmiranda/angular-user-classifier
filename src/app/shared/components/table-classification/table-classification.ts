@@ -1,8 +1,7 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Customer } from '../../../models/customer.model';
 import { Store } from '@ngrx/store';
-import {
-  selectAllCustomers,
+import {  
   selectSortBy,
   selectSortedCustomers,
 } from '../../../store/customers/customers.selectors';
@@ -18,9 +17,9 @@ import { AsyncPipe } from '@angular/common';
   styleUrl: './table-classification.scss',
   templateUrl: './table-classification.html',
 })
-export class TableClassification {
+export class TableClassification implements OnInit{
   private store = inject(Store);
-  allCustomers$ = this.store.select(selectSortedCustomers);
+  sortedCustomers$ = this.store.select(selectSortedCustomers);
   sortBy$ = this.store.select(selectSortBy);
 
   constructor() {}
