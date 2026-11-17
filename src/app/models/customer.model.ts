@@ -4,3 +4,9 @@ export interface Customer {
     age: number,
     profile: string
 }
+
+export interface CustomerDTO{
+  id: number;
+  name: string;
+  age: number;
+}

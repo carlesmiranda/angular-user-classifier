@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, of, switchMap } from 'rxjs';
-import { Customer } from '../../models/customer.model';
+import { Customer, CustomerDTO } from '../../models/customer.model';
 import {
   loadCustomersInfoAction,
   loadCustomersInfoFailureAction,
@@ -22,7 +22,7 @@ export class CustomersEffects {
       //LoadCustomers
       ofType(loadCustomersInfoAction),
       switchMap(() => {
-        return this.http.get<Customer[]>(API_URL).pipe(
+        return this.http.get<CustomerDTO[]>(API_URL).pipe(
           map((backendData) => {
             const customers: Customer[] = backendData.map((customer) => ({
               id: customer.id,
