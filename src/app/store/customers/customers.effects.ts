@@ -41,7 +41,7 @@ export class CustomersEffects {
   );
 
   obtenerPerfil(name: string) {
-    const PERFIL_PIRI_PIRI = 'Piri Piri Lovers';
+    const PERFIL_PIRI_PIRI = 'Pollo Piri Piri Lovers';
     const PERFIL_POLLO_HIERBAS = 'Pollo con Hierbas Lovers';
 
     if (!name) return PERFIL_PIRI_PIRI;
