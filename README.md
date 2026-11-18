@@ -12,6 +12,7 @@ This is a practice kata based on a frontend technical test.
 - Classifies every customer into a profile when the data is loaded.
 - Displays the customers in a plain HTML table (id, name, age and profile).
 - Sorts the table in ascending order by id, name, age or profile, using a dropdown.
+- Loading and error states with accessible messages.
 
 ## Tech stack
 
