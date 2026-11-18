@@ -1,31 +1,42 @@
 <div class="table">
+  @if (isLoading$ | async) {
+    <div role="status">Loading...</div>
+  } @else if (error$ | async; as error) {
+    <div role="alert">{{ error }}</div>
+  } @else {
     <div class="dropdown">
-        <label for="sort">Sort By: </label>
-        <select id="sort" #sortSelect (change)="changeSort(sortSelect.value)" [value]="sortBy$ | async">
-            <option value="id">Id</option>
-            <option value="name">Name</option>
-            <option value="age">Age</option>
-            <option value="profile">Profile</option>
-        </select>
+      <label for="sort">Sort By: </label>
+      <select
+        id="sort"
+        #sortSelect
+        (change)="changeSort(sortSelect.value)"
+        [value]="sortBy$ | async"
+      >
+        <option value="id">Id</option>
+        <option value="name">Name</option>
+        <option value="age">Age</option>
+        <option value="profile">Profile</option>
+      </select>
     </div>
-  <table>    
-    <thead>
-      <tr>
-        <th>Id</th>
-        <th>Name</th>
-        <th>Age</th>
-        <th>Profile</th>
-      </tr>
-    </thead>
-    <tbody>
-      @for (customer of sortedCustomers$ | async; track customer.id) {
+    <table>
+      <thead>
         <tr>
-          <td>{{ customer.id }}</td>
-          <td>{{ customer.name }}</td>
-          <td>{{ customer.age }}</td>
-          <td>{{ customer.profile }}</td>
+          <th>Id</th>
+          <th>Name</th>
+          <th>Age</th>
+          <th>Profile</th>
         </tr>
-      }
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        @for (customer of sortedCustomers$ | async; track customer.id) {
+          <tr>
+            <td>{{ customer.id }}</td>
+            <td>{{ customer.name }}</td>
+            <td>{{ customer.age }}</td>
+            <td>{{ customer.profile }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
 </div>

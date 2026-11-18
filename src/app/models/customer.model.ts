@@ -7,6 +7,6 @@ export interface Customer {
 
 export interface CustomerDTO{
   id: number;
-  name: string;
+  name?: string | null;
   age: number;
 }

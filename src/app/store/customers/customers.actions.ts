@@ -16,7 +16,7 @@ export const loadCustomersInfoSuccessAction = createAction(
 );
 export const loadCustomersInfoFailureAction = createAction(
   ActionsTypes.LOAD_CUSTOMERS_INFO_FAILURE,
-  props<{ error: any }>(),
+  props<{ error: string }>(),
 );
 
 export const changeSortCustomersAction = createAction(

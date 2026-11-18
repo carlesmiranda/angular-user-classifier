@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, of, switchMap } from 'rxjs';
@@ -27,14 +27,14 @@ export class CustomersEffects {
             const customers: Customer[] = backendData.map((customer) => ({
               id: customer.id,
               age: customer.age,
-              name: customer.name,
+              name: customer.name ?? '',
               profile: obtenerPerfil(customer.name),
             }));
             return loadCustomersInfoSuccessAction({ customers: customers });
           }),
           //http fails
-          catchError((error) => {
-            return of(loadCustomersInfoFailureAction({ error }));
+          catchError((error: HttpErrorResponse) => {
+            return of(loadCustomersInfoFailureAction({ error: `Could not load customers (error ${error.status})` }));
           }),
         );
       }),

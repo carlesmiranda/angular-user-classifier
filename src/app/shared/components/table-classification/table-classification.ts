@@ -2,6 +2,8 @@ import { Component, inject, OnInit } from '@angular/core';
 import { Customer } from '../../../models/customer.model';
 import { Store } from '@ngrx/store';
 import {  
+  selectCustomersError,
+  selectCustomersIsLoading,
   selectSortBy,
   selectSortedCustomers,
 } from '../../../store/customers/customers.selectors';
@@ -21,8 +23,10 @@ export class TableClassification implements OnInit{
   private store = inject(Store);
   sortedCustomers$ = this.store.select(selectSortedCustomers);
   sortBy$ = this.store.select(selectSortBy);
+  isLoading$ = this.store.select(selectCustomersIsLoading);
+  error$ = this.store.select(selectCustomersError);
 
-  constructor() {}
+  
 
   ngOnInit() {
     this.store.dispatch(loadCustomersInfoAction());
